@@ -14,18 +14,16 @@
                 {{-- Nama Balita --}}
                 <div>
                     <x-input-label for="nama" value="Nama Balita" />
-                    <x-text-input id="nama" name="nama" type="text"
-                                  class="mt-1 block w-full"
-                                  :value="old('nama', $balita->nama)" required autofocus />
+                    <x-text-input id="nama" name="nama" type="text" class="mt-1 block w-full" :value="old('nama', $balita->nama)"
+                        required autofocus />
                     <x-input-error :messages="$errors->get('nama')" class="mt-2" />
                 </div>
 
                 {{-- Tanggal Lahir --}}
                 <div class="mt-4">
                     <x-input-label for="tanggal_lahir" value="Tanggal Lahir" />
-                    <x-text-input id="tanggal_lahir" name="tanggal_lahir" type="date"
-                                  class="mt-1 block w-full"
-                                  :value="old('tanggal_lahir', $balita->tanggal_lahir)" required />
+                    <x-text-input id="tanggal_lahir" name="tanggal_lahir" type="date" class="mt-1 block w-full"
+                        :value="old('tanggal_lahir', $balita->tanggal_lahir)" required />
                     <x-input-error :messages="$errors->get('tanggal_lahir')" class="mt-2" />
                 </div>
 
@@ -33,9 +31,11 @@
                 <div class="mt-4">
                     <x-input-label for="jenis_kelamin" value="Jenis Kelamin" />
                     <select id="jenis_kelamin" name="jenis_kelamin"
-                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                        <option value="L" {{ old('jenis_kelamin', $balita->jenis_kelamin)=='L' ? 'selected' : '' }}>Laki-laki</option>
-                        <option value="P" {{ old('jenis_kelamin', $balita->jenis_kelamin)=='P' ? 'selected' : '' }}>Perempuan</option>
+                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                        <option value="L"
+                            {{ old('jenis_kelamin', $balita->jenis_kelamin) == 'L' ? 'selected' : '' }}>Laki-laki</option>
+                        <option value="P"
+                            {{ old('jenis_kelamin', $balita->jenis_kelamin) == 'P' ? 'selected' : '' }}>Perempuan</option>
                     </select>
                     <x-input-error :messages="$errors->get('jenis_kelamin')" class="mt-2" />
                 </div>
@@ -43,13 +43,13 @@
                 {{-- Nama Ibu --}}
                 <div class="mt-4">
                     <x-input-label for="nama_ibu" value="Nama Ibu" />
-                    <x-text-input id="nama_ibu" name="nama_ibu" type="text"
-                                  class="mt-1 block w-full"
-                                  :value="old('nama_ibu', $balita->nama_ibu)" />
+                    <x-text-input id="nama_ibu" name="nama_ibu" type="text" class="mt-1 block w-full"
+                        :value="old('nama_ibu', $balita->nama_ibu)" />
                     <x-input-error :messages="$errors->get('nama_ibu')" class="mt-2" />
                 </div>
 
-                <div class="mt-6 flex justify-end">
+                <div class="mt-6 flex justify-end gap-2">
+                    <x-back-button :href="route('balita.index')" />
                     <x-primary-button>
                         Update
                     </x-primary-button>

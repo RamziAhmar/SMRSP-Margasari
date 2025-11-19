@@ -7,10 +7,42 @@
 
     <div class="py-6 max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-        <a href="{{ route('pengukuran.create', $balita->id_balita) }}"
-           class="inline-block mb-4 px-4 py-2 bg-blue-600 text-white rounded">
-            + Tambah Pengukuran
-        </a>
+        <div class="mb-4 flex items-center justify-end">
+
+            <x-back-button :href="route('balita.index')" />
+        </div>
+
+        @php
+            // ambil pengukuran terakhir (paling baru) beserta hasilPrediksi-nya
+            $latestMeasurement = $pengukurans->sortByDesc('tanggal_ukur')->first();
+            $latestPred = $latestMeasurement?->hasilPrediksi;
+
+            $baseClass = 'w-full rounded-md px-4 py-3 font-semibold text-sm sm:text-base text-center shadow';
+            $bannerClass = 'bg-gray-200 text-gray-800 border border-gray-300';
+            $labelText = 'Hasil prediksi bulan depan: belum tersedia';
+            $detailText = '';
+
+            if ($latestPred) {
+                if ($latestPred->label_pred) {
+                    // prediksi akan stunting → MERAH
+                    $bannerClass = 'bg-red-500 text-white border border-red-600';
+                    $labelText = 'Hasil prediksi bulan depan: RISIKO STUNTING';
+                } else {
+                    // aman → HIJAU
+                    $bannerClass = 'bg-green-500 text-white border border-green-600';
+                    $labelText = 'Hasil prediksi bulan depan: AMAN';
+                }
+
+                $percent = number_format($latestPred->prob_pred * 100, 2);
+                $detailText = " (Probabilitas: {$percent}%)";
+            }
+        @endphp
+
+        <div class="mb-4">
+            <div class="{{ $baseClass . ' ' . $bannerClass }}">
+                {{ $labelText }}{!! $detailText !!}
+            </div>
+        </div>
 
         <div class="bg-white p-4 shadow-sm sm:rounded-lg mb-6">
             <canvas id="grafikPertumbuhan" height="120"></canvas>
@@ -29,7 +61,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($pengukurans as $p)
+                    @foreach ($pengukurans as $p)
                         <tr class="border-b">
                             <td class="py-2">{{ $p->tanggal_ukur }}</td>
                             <td class="py-2">{{ $p->umur_bulan }}</td>
@@ -37,7 +69,7 @@
                             <td class="py-2">{{ $p->tb_cm }}</td>
                             <td class="py-2">{{ $p->lila_cm }}</td>
                             <td class="py-2">
-                                @if($p->hasilPrediksi)
+                                @if ($p->hasilPrediksi)
                                     {{ $p->hasilPrediksi->label_pred ? 'Risiko Stunting' : 'Tidak' }}
                                     ({{ number_format($p->hasilPrediksi->prob_pred * 100, 2) }}%)
                                 @else
@@ -52,28 +84,35 @@
     </div>
 
     @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const ctx = document.getElementById('grafikPertumbuhan').getContext('2d');
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            const ctx = document.getElementById('grafikPertumbuhan').getContext('2d');
 
-        fetch("{{ route('pengukuran.grafik', $balita->id_balita) }}")
-            .then(res => res.json())
-            .then(data => {
-                const labels = data.map(d => d.tanggal_ukur);
-                const bb = data.map(d => d.bb_kg);
-                const tb = data.map(d => d.tb_cm);
+            fetch("{{ route('pengukuran.grafik', $balita->id_balita) }}")
+                .then(res => res.json())
+                .then(data => {
+                    const labels = data.map(d => d.tanggal_ukur);
+                    const bb = data.map(d => d.bb_kg);
+                    const tb = data.map(d => d.tb_cm);
 
-                new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels,
-                        datasets: [
-                            { label: 'BB (kg)', data: bb, borderWidth: 2 },
-                            { label: 'TB (cm)', data: tb, borderWidth: 2 },
-                        ]
-                    }
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels,
+                            datasets: [{
+                                    label: 'BB (kg)',
+                                    data: bb,
+                                    borderWidth: 2
+                                },
+                                {
+                                    label: 'TB (cm)',
+                                    data: tb,
+                                    borderWidth: 2
+                                },
+                            ]
+                        }
+                    });
                 });
-            });
-    </script>
+        </script>
     @endpush
 </x-app-layout>

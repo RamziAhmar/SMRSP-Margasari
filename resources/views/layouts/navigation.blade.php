@@ -17,7 +17,12 @@
                     </x-nav-link>
                     <!-- Data Balita -->
                     <x-nav-link :href="route('balita.index')" :active="request()->routeIs('balita.*')">
-                        {{ __('Data Balita') }}
+                        {{ __('Data Balita & Pengukuran') }}
+                    </x-nav-link>
+
+                    <!-- Laporan -->
+                    <x-nav-link :href="route('laporan.index')" :active="request()->routeIs('laporan.*')">
+                        {{ __('Laporan') }}
                     </x-nav-link>
 
                     @if (Auth::user() && Auth::user()->role === 'admin')

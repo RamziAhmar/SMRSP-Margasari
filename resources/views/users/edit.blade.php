@@ -37,8 +37,10 @@
                     <x-input-label for="role" value="Role" />
                     <select id="role" name="role"
                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                        <option value="kader" {{ old('role', $user->role) == 'kader' ? 'selected' : '' }}>Kader</option>
-                        <option value="admin" {{ old('role', $user->role) == 'admin' ? 'selected' : '' }}>Admin</option>
+                        <option value="kader" {{ old('role', $user->role) == 'kader' ? 'selected' : '' }}>Kader
+                        </option>
+                        <option value="admin" {{ old('role', $user->role) == 'admin' ? 'selected' : '' }}>Admin
+                        </option>
                     </select>
                     <x-input-error :messages="$errors->get('role')" class="mt-2" />
                 </div>
@@ -49,7 +51,8 @@
                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
                 </div>
 
-                <div class="mt-6 flex justify-end">
+                <div class="mt-6 flex justify-end gap-2">
+                    <x-back-button :href="route('users.index')" />
                     <x-primary-button>Update</x-primary-button>
                 </div>
             </form>

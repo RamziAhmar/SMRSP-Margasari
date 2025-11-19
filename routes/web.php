@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BalitaController;
-use App\Http\Controllers\PengukuranController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BalitaController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PengukuranController;
 
 
 Route::get('/', function () {
@@ -38,6 +39,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware('role:admin')->group(function () {
         Route::resource('users', UserController::class)->except(['show']);
+        Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
+        Route::get('/laporan/cetak', [LaporanController::class, 'cetak'])->name('laporan.cetak');
     });
 });
 

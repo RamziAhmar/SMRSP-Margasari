@@ -48,7 +48,8 @@
                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
                 </div>
 
-                <div class="mt-6 flex justify-end">
+                <div class="mt-6 flex justify-end gap-2">
+                    <x-back-button :href="route('users.index')" />
                     <x-primary-button>Simpan</x-primary-button>
                 </div>
             </form>
