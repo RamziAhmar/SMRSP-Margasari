@@ -5,11 +5,12 @@ Dokumentasi mencakup beberapa artefak pemodelan seperti:
 
 - Use Case Diagram
 - Class Diagram
+- Factory Method
+- Builder
+- Singleton
+- Dependency Injection
 - Activity Diagram
-- Sequence Diagram
-- Entity Relationship Diagram (ERD)
-- Deployment Diagram (opsional)
-- dan dokumen pendukung lainnya
+- State Machine Diagram
 
 ---
 
