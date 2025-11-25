@@ -1,16 +1,25 @@
 # 📘 Sistem Monitoring Risiko Stunting Posyandu (SMRSP) Bougenville
 
-Repositori ini berisi dokumentasi desain sistem untuk **Sistem Monitoring Risiko Stunting Posyandu (SMRSP) Bougenville**.  
-Dokumentasi mencakup beberapa artefak pemodelan seperti:
+Repositori ini berisi dokumentasi pengembangan **Sistem Monitoring Risiko Stunting Posyandu (SMRSP) Bougenville**.  
 
-- Use Case Diagram
-- Class Diagram
-- Factory Method
-- Builder
-- Singleton
-- Dependency Injection
-- Activity Diagram
-- State Machine Diagram
+---
+
+## 🧭 Daftar Isi
+
+- [Deskripsi Singkat Sistem](#deskripsi-singkat-sistem)
+- [Struktur Folder Desain Sistem](#struktur-folder)
+- [Desain Sistem](#diagram-uml)
+  - [Use Case Diagram](#use-case-diagram)
+  - [Class Diagram](#class-diagram)
+  - [Dependency Injection](#dependency-injection)
+  - [Factory Method](#factory-method)
+  - [Builder](#builder)
+  - [Singleton](#singleton)
+  - [Sequence Diagram](#sequence-diagram)
+  - [Activity Diagram](#activity-diagram)
+  - [State Machine Diagram](#state-machine-diagram)
+- [Cara Instalasi](#cara-instalasi)
+
 
 ---
 
@@ -50,6 +59,7 @@ Folder ini berisikan diagram dan gambar desain sistem diantaranya:
 │   ├── state-machine-diagram.png
 │   └── SMRSP.drawio
 ```
+---
 
 ## 📊 Desain Sistem
 
@@ -107,6 +117,8 @@ Folder ini berisikan diagram dan gambar desain sistem diantaranya:
   <img src="docs/state-machine-diagram.png" alt="Use Case Diagram" width="100%">
 </p>
 
+---
+
 ## ⬇️ Cara Instalasi
 
 ```
@@ -134,4 +146,4 @@ buka terminal baru dan jalankan
 ```
 php artisan serve
 ```
-server akan berkalan di localhost:9000
+Server akan berkalan di localhost:9000
